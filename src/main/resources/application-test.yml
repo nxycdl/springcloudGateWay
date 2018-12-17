@@ -1,0 +1,23 @@
+server:
+  port: 5602
+spring:
+  application:
+    name: gateWayService
+  boot:
+    admin:
+      client:
+        url: http://192.168.200.135:7000
+  cloud:
+    gateway:
+      locator:
+        enable: true
+      loadbalancer:
+        use404: true
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: service_to_user
+        uri: lb://userimp
+        predicates:
+        - Path=/user/**
